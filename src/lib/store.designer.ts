@@ -25,6 +25,9 @@ export const isMac: Writable<boolean> = writable(false);
 
 export const isChrome: Writable<boolean> = writable(false);
 
+export const undoArr: Writable<any[]> = writable([]);
+export const redoArr: Writable<any[]> = writable([]);
+
 export const screens: Writable<ScreenObj[]> = writable([]);
 export const updateScreens = () => {
 	screens.update(($value) => ($value = $value));

@@ -4,9 +4,13 @@
 	import { updateScreens, screens, currentScreenIndex } from '$lib/store.designer';
 	import type { PanelObj } from '$lib/types';
 
+	console.log($screens, $currentScreenIndex)
+
 	import ColorPicker from './components/ColorPicker.svelte';
 	import SignalButtons from './components/SignalButtons.svelte';
 	import CoordinateOptions from '../InfoToolbar/InfoBar.Coordinates.svelte';
+
+	import { undo, redo } from '$lib/functions'
 
 	const selectCriss = () => {
 		let panels = $screens[$currentScreenIndex].panels;

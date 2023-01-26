@@ -5,9 +5,16 @@
 	import SignalLines from './Toolbar.SignalLines.svelte';
 
 	import { selection, currentScreenIndex } from '$lib/store.designer';
+
+	import { undo, redo } from '$lib/functions'
 </script>
 
 <div id="container">
+	<div class="crisscross">
+		<button class="criss-cross" on:click={undo}>Undo</button>
+		<button class="criss-cross" on:click={redo}>Redo</button>
+	</div>
+
 	<div id="mode">
 		<Mode />
 	</div>
@@ -97,5 +104,17 @@
 		flex: 1;
 
 		display: flex;
+	}
+	
+	.criss-cross {
+		padding: 5px;
+		width: 45%;
+	}
+
+	.crisscross {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-top: 10px;
 	}
 </style>

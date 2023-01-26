@@ -1,10 +1,42 @@
 <script lang="ts">
 	import { screens, currentScreenIndex } from '$lib/store.designer';
+	import { addUndoAfter, addUndoPrevious } from '$lib/functions';
+
+	const rearViewChanged = (e:any) => {
+		addUndoPrevious();
+		$screens[$currentScreenIndex].isRearView = e.target.checked;
+		addUndoAfter();
+	}
+
+	const showCoordinateChanged = (e:any) => {
+		addUndoPrevious();
+		$screens[$currentScreenIndex].showCoordinates = e.target.checked;
+		addUndoAfter();
+	}
+
+	const opacityChanged = (e:any) => {
+		addUndoPrevious();
+		$screens[$currentScreenIndex].opacity = e.target.value;
+		addUndoAfter();		
+	}
+
+	const fontSizeChanged = (e:any) => {
+		addUndoPrevious();
+		$screens[$currentScreenIndex].rearViewLabelFontSize = e.target.value;
+		addUndoAfter();		
+	}
+
+
 </script>
 
 <div class="general">
 	<label class="hovered">
-		<input type="checkbox" bind:checked={$screens[$currentScreenIndex].showCoordinates} />
+		<input
+			type="checkbox"
+			on:change={showCoordinateChanged} 
+			checked={$screens[$currentScreenIndex].showCoordinates}
+			/> 
+		<!-- bind:checked={$screens[$currentScreenIndex].showCoordinates} -->
 		Show Coordinates
 	</label>
 
@@ -12,7 +44,12 @@
 
 	<div id="input-wrapper" class="rear-view-options">
 		<label class="hovered">
-			<input type="checkbox" bind:checked={$screens[$currentScreenIndex].isRearView} />
+			<input
+				type="checkbox"
+				checked={$screens[$currentScreenIndex].isRearView}
+				on:change={rearViewChanged} 
+				/>
+			<!-- bind:checked={$screens[$currentScreenIndex].isRearView}  -->
 			Rear View
 		</label>
 		<div class="input-row">
@@ -23,9 +60,11 @@
 				min="0"
 				max=".5"
 				step=".01"
-				bind:value={$screens[$currentScreenIndex].opacity}
+				value={$screens[$currentScreenIndex].opacity}
+				on:change={opacityChanged}
 				class="range"
-			/>
+				/>
+				<!-- bind:value={$screens[$currentScreenIndex].opacity} -->
 		</div>
 		<div class="input-row">
 			<div class="label">Font Size</div>
@@ -35,9 +74,11 @@
 				min="0"
 				max="1000"
 				step="1"
-				bind:value={$screens[$currentScreenIndex].rearViewLabelFontSize}
+				value={$screens[$currentScreenIndex].rearViewLabelFontSize}
+				on:change={fontSizeChanged}
 				class="range"
-			/>
+				/>
+				<!-- bind:value={$screens[$currentScreenIndex].rearViewLabelFontSize} -->
 		</div>
 	</div>
 </div>

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { colorButtons, colorState } from '$lib/store.designer';
 	import { fly, slide } from 'svelte/transition';
+	import { addUndoPrevious, addUndoAfter } from '$lib/functions';
 
 	import type { ColorObjKey } from '$lib/types';
 
@@ -34,7 +35,9 @@
 					class="color-button"
 					style="background-color: {color}"
 					on:click={() => {
+						addUndoPrevious();
 						classObj.setColors(layer, color);
+						addUndoAfter();
 					}}
 				/>
 			{/each}
